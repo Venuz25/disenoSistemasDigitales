@@ -1,0 +1,117 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity ping_pong is
+    Port ( clk : in STD_LOGIC;
+           reset : in STD_LOGIC;
+           button : in STD_LOGIC;
+           leds : out STD_LOGIC_VECTOR (7 downto 0);
+           player1_display : out STD_LOGIC_VECTOR (6 downto 0);
+           player2_display : out STD_LOGIC_VECTOR (6 downto 0));
+end ping_pong;
+
+architecture Behavioral of ping_pong is
+    signal count : STD_LOGIC_VECTOR (7 downto 0) := "10000000";
+    signal direction : STD_LOGIC := '0'; -- 0: left to right, 1: right to left
+    signal player1_score : INTEGER range 0 to 9 := 0;
+    signal player2_score : INTEGER range 0 to 9 := 0;
+    signal clk_div : STD_LOGIC := '0';
+    constant CLK_DIV_MAX : integer := 25000000; 
+    signal counter : integer range 0 to CLK_DIV_MAX - 1 := 0;
+    signal button_pressed : STD_LOGIC := '0';
+begin
+    process (clk, reset)
+    begin
+        if reset = '1' then
+            count <= "10000000"; 
+            direction <= '0';
+            player1_score <= 0;
+            player2_score <= 0;
+            counter <= 0;
+            clk_div <= '0';
+            button_pressed <= '0';
+        elsif rising_edge(clk) then
+            if counter = CLK_DIV_MAX - 1 then
+                counter <= 0;
+                clk_div <= NOT clk_div;
+                if button = '1' and button_pressed = '0' then
+                    button_pressed <= '1';
+                    if direction = '0' and count = "00000001" then
+                        direction <= '1';
+                        player1_score <= player1_score + 1;
+                    elsif direction = '1' and count = "10000000" then
+                        direction <= '0';
+                        player2_score <= player2_score + 1;
+                    end if;
+                elsif button = '0' then
+                    button_pressed <= '0';
+                end if;
+                if direction = '0' then
+                    case count is
+                        when "10000000" => count <= "01000000";
+                        when "01000000" => count <= "00100000";
+                        when "00100000" => count <= "00010000";
+                        when "00010000" => count <= "00001000";
+                        when "00001000" => count <= "00000100";
+                        when "00000100" => count <= "00000010";
+                        when "00000010" => count <= "00000001";
+                        when "00000001" => count <= "10000000";
+                        when others => count <= "10000000"; 
+                    end case;
+                else
+                    case count is
+                        when "10000000" => count <= "00000001";
+                        when "00000001" => count <= "00000010";
+                        when "00000010" => count <= "00000100";
+                        when "00000100" => count <= "00001000";
+                        when "00001000" => count <= "00010000";
+                        when "00010000" => count <= "00100000";
+                        when "00100000" => count <= "01000000";
+                        when "01000000" => count <= "10000000";
+                        when others => count <= "10000000"; 
+                    end case;
+                end if;
+            else
+                counter <= counter + 1;
+            end if;
+        end if;
+    end process;
+
+    process (player1_score)
+    begin
+        case player1_score is
+            when 0 => player1_display <= "0111111"; -- 0
+            when 1 => player1_display <= "0000110"; -- 1
+            when 2 => player1_display <= "1011011"; -- 2
+            when 3 => player1_display <= "1001111"; -- 3
+            when 4 => player1_display <= "1100110"; -- 4
+            when 5 => player1_display <= "1101101"; -- 5
+            when 6 => player1_display <= "1111101"; -- 6
+            when 7 => player1_display <= "0000111"; -- 7
+            when 8 => player1_display <= "1111111"; -- 8
+            when 9 => player1_display <= "1101111"; -- 9
+            when others => player1_display <= "1111111"; -- Display apagado
+        end case;
+    end process;
+
+    process (player2_score)
+    begin
+        case player2_score is
+            when 0 => player2_display <= "0111111"; -- 0
+            when 1 => player2_display <= "0000110"; -- 1
+            when 2 => player2_display <= "1011011"; -- 2
+            when 3 => player2_display <= "1001111"; -- 3
+            when 4 => player2_display <= "1100110"; -- 4
+            when 5 => player2_display <= "1101101"; -- 5
+            when 6 => player2_display <= "1111101"; -- 6
+            when 7 => player2_display <= "0000111"; -- 7
+            when 8 => player2_display <= "1111111"; -- 8
+            when 9 => player2_display <= "1101111"; -- 9
+            when others => player2_display <= "1111111"; -- Display apagado
+        end case;
+    end process;
+
+    leds <= count;
+end Behavioral;

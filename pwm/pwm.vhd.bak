@@ -1,0 +1,66 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity pwm is port(
+        salida1 : out std_logic;
+        salida2 : out std_logic;   
+        salida3 : out std_logic;
+        Clk : in std_logic;
+        reset : in std_logic
+    );
+end pwm;
+
+architecture divisor of pwm is
+    signal contador : integer range 0 to 9999999 := 0;
+    signal salida_media1 : std_logic := '0';
+    signal salida_media2 : std_logic := '0';
+    signal salida_media3 : std_logic := '0';
+    signal pwm_out1 : std_logic;
+    signal pwm_out2 : std_logic;
+    signal pwm_out3 : std_logic;
+    signal direccion : std_logic := '0';  -- Signal to control the direction
+
+    constant periodo_clk : integer := 10000;  -- Reduce to increase the speed of the PWM
+
+begin
+    Divisor_frecuencia : process(Clk, reset)
+    begin
+        if reset = '0' then
+            salida_media1 <= '0';
+            salida_media2 <= '0';
+            salida_media3 <= '0';
+            contador <= 0;
+            direccion <= '0';  -- Reset direction on reset
+        elsif rising_edge(Clk) then
+            if contador = periodo_clk - 1 then
+                salida_media1 <= not salida_media1;
+                salida_media2 <= not salida_media2;
+                salida_media3 <= not salida_media3;
+                contador <= 0;
+
+                -- Change direction every 180 degrees
+                if (direccion = '0' and contador < (periodo_clk / 2)) or
+                   (direccion = '1' and contador >= (periodo_clk / 2)) then
+                    direccion <= not direccion;
+                end if;
+            else
+                contador <= contador + 1;
+            end if;
+        end if;
+    end process;
+
+    salida1 <= salida_media1;
+    salida2 <= salida_media2;
+    salida3 <= salida_media3;
+
+    pwm_out1 <= '1' when contador < (3 * periodo_clk / 4) and direccion = '0' else
+               '1' when contador >= (3 * periodo_clk / 4) and contador < periodo_clk and direccion = '1' else
+               '0';
+    pwm_out2 <= '1' when contador < (3 * periodo_clk / 4) and direccion = '0' else
+               '1' when contador >= (3 * periodo_clk / 4) and contador < periodo_clk and direccion = '1' else
+               '0';
+    pwm_out3 <= '1' when contador < (3 * periodo_clk / 4) and direccion = '0' else
+               '1' when contador >= (3 * periodo_clk / 4) and contador < periodo_clk and direccion = '1' else
+               '0';
+    
+end divisor;

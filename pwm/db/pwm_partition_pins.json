@@ -1,0 +1,29 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "pwm_out",
+					"strict" : false
+				},
+				{
+					"name" : "pwm_out_r",
+					"strict" : false
+				},
+				{
+					"name" : "pwm_out_l",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

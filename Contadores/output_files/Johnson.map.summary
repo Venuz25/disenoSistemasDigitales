@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Jun 12 23:03:32 2024
+Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+Revision Name : Johnson
+Top-level Entity Name : Johnson
+Family : Cyclone IV E
+Total logic elements : 121
+    Total combinational functions : 121
+    Dedicated logic registers : 57
+Total registers : 57
+Total pins : 14
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

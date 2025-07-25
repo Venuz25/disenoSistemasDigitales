@@ -1,0 +1,77 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'clk50Mhz'
+Slack : -4.299
+TNS   : -57.383
+
+Type  : Slow 1200mV 85C Model Setup 'Reloj:Reloj1|salida_media'
+Slack : -0.334
+TNS   : -0.688
+
+Type  : Slow 1200mV 85C Model Hold 'Reloj:Reloj1|salida_media'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk50Mhz'
+Slack : 0.742
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk50Mhz'
+Slack : -3.000
+TNS   : -41.662
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Reloj:Reloj1|salida_media'
+Slack : -1.487
+TNS   : -5.948
+
+Type  : Slow 1200mV 0C Model Setup 'clk50Mhz'
+Slack : -4.028
+TNS   : -49.809
+
+Type  : Slow 1200mV 0C Model Setup 'Reloj:Reloj1|salida_media'
+Slack : -0.201
+TNS   : -0.395
+
+Type  : Slow 1200mV 0C Model Hold 'Reloj:Reloj1|salida_media'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk50Mhz'
+Slack : 0.689
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk50Mhz'
+Slack : -3.000
+TNS   : -41.662
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Reloj:Reloj1|salida_media'
+Slack : -1.487
+TNS   : -5.948
+
+Type  : Fast 1200mV 0C Model Setup 'clk50Mhz'
+Slack : -1.315
+TNS   : -11.233
+
+Type  : Fast 1200mV 0C Model Setup 'Reloj:Reloj1|salida_media'
+Slack : 0.416
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Reloj:Reloj1|salida_media'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk50Mhz'
+Slack : 0.296
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk50Mhz'
+Slack : -3.000
+TNS   : -30.664
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Reloj:Reloj1|salida_media'
+Slack : -1.000
+TNS   : -4.000
+
+------------------------------------------------------------

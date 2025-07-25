@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Jun 12 23:39:17 2024
+Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+Revision Name : anillo
+Top-level Entity Name : anillo
+Family : Cyclone IV E
+Total logic elements : 124
+    Total combinational functions : 124
+    Dedicated logic registers : 58
+Total registers : 58
+Total pins : 17
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

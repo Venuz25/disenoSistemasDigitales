@@ -1,0 +1,79 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Reloj is
+    port( 
+        salida_5hz: out std_logic;
+        salida_7hz: out std_logic;
+        salida_100khz: out std_logic;
+        salida_1mhz: out std_logic;
+        salida_25mhz: out std_logic;
+        clk: in std_logic;
+        reset: in std_logic 
+    );
+end Reloj;
+
+architecture divisor of Reloj is
+    signal contador_5hz: integer range 0 to 4999999 := 0;
+    signal contador_7hz: integer range 0 to 3571428 := 0;
+    signal contador_100khz: integer range 0 to 249 := 0;
+    signal contador_1mhz: integer range 0 to 24 := 0;
+    signal contador_25mhz: integer range 0 to 0 := 0; -- No necesita contar
+    
+    signal salida_5hz_interna: std_logic;
+    signal salida_7hz_interna: std_logic;
+    signal salida_100khz_interna: std_logic;
+    signal salida_1mhz_interna: std_logic;
+    signal salida_25mhz_interna: std_logic;
+    
+begin
+    Divisor_frecuencia: process(clk, reset)
+    begin
+        if reset = '0' then
+            contador_5hz <= 0;
+            contador_7hz <= 0;
+            contador_100khz <= 0;
+            contador_1mhz <= 0;
+            -- No necesita reiniciar contador_25mhz porque no se utiliza para la división del reloj.
+        elsif rising_edge(clk) then
+            -- Divisor para 5Hz
+            if contador_5hz = 4999999 then
+                contador_5hz <= 0;
+                salida_5hz_interna <= not salida_5hz_interna;
+            else
+                contador_5hz <= contador_5hz + 1;
+            end if;
+            
+            -- Divisor para 7Hz
+            if contador_7hz = 3571428 then
+                contador_7hz <= 0;
+                salida_7hz_interna <= not salida_7hz_interna;
+            else
+                contador_7hz <= contador_7hz + 1;
+            end if;
+            
+            -- Divisor para 100kHz
+            if contador_100khz = 249 then
+                contador_100khz <= 0;
+                salida_100khz_interna <= not salida_100khz_interna;
+            else
+                contador_100khz <= contador_100khz + 1;
+            end if;
+            
+            -- Divisor para 1MHz
+            if contador_1mhz = 24 then
+                contador_1mhz <= 0;
+                salida_1mhz_interna <= not salida_1mhz_interna;
+            else
+                contador_1mhz <= contador_1mhz + 1;
+            end if;
+        end if;
+    end process;
+    
+    salida_5hz <= salida_5hz_interna;
+    salida_7hz <= salida_7hz_interna;
+    salida_100khz <= salida_100khz_interna;
+    salida_1mhz <= salida_1mhz_interna;
+    salida_25mhz <= clk; -- Simplemente conecta la entrada de reloj a la salida de 25MHz.
+    
+end divisor;

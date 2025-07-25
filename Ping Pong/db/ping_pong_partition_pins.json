@@ -1,0 +1,113 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "leds[0]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[1]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[2]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[3]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[4]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[5]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[6]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[7]",
+					"strict" : false
+				},
+				{
+					"name" : "player1_display[0]",
+					"strict" : false
+				},
+				{
+					"name" : "player1_display[1]",
+					"strict" : false
+				},
+				{
+					"name" : "player1_display[2]",
+					"strict" : false
+				},
+				{
+					"name" : "player1_display[3]",
+					"strict" : false
+				},
+				{
+					"name" : "player1_display[4]",
+					"strict" : false
+				},
+				{
+					"name" : "player1_display[5]",
+					"strict" : false
+				},
+				{
+					"name" : "player1_display[6]",
+					"strict" : false
+				},
+				{
+					"name" : "player2_display[0]",
+					"strict" : false
+				},
+				{
+					"name" : "player2_display[1]",
+					"strict" : false
+				},
+				{
+					"name" : "player2_display[2]",
+					"strict" : false
+				},
+				{
+					"name" : "player2_display[3]",
+					"strict" : false
+				},
+				{
+					"name" : "player2_display[4]",
+					"strict" : false
+				},
+				{
+					"name" : "player2_display[5]",
+					"strict" : false
+				},
+				{
+					"name" : "player2_display[6]",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "button2",
+					"strict" : false
+				},
+				{
+					"name" : "button1",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

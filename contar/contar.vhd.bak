@@ -1,0 +1,28 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+
+
+--declarar la entidad
+
+entity contar is
+
+port ( clk50Mhz: in std_logic;
+       leds: out std_logic_vector (3 downto 0)) ; 	-- (3 to 0)
+		 
+end contar;
+
+
+architecture cuentabinaria of contar is
+
+
+signal numeros : std_logic_vector (3 downto 0) := "0000";  -- se inicializa el vector en ceros!!
+
+signal reloj_divisor: std_logic; 
+
+
+ component  
+		 
+		 
+		 

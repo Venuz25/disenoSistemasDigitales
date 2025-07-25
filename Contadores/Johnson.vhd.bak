@@ -1,0 +1,97 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity jhonson is
+    Port (
+        clk : in STD_LOGIC;
+        reset : in STD_LOGIC;
+        output : out STD_LOGIC_VECTOR(4 downto 0);
+        display : out STD_LOGIC_VECTOR(6 downto 0)
+    );
+end jhonson;
+
+architecture Behavioral of jhonson is
+    signal count : STD_LOGIC_VECTOR(4 downto 0) := "00000";
+    signal clk_div : STD_LOGIC := '0';
+    constant CLK_DIV_MAX : integer := 50000000; -- Incrementado para hacer el contador más lento
+    signal counter : integer range 0 to CLK_DIV_MAX - 1 := 0;
+    signal startup_counter : integer range 0 to CLK_DIV_MAX - 1 := 0;
+    constant STARTUP_DURATION : integer := 5000000; 
+    signal display_value : std_logic_vector(6 downto 0);
+begin
+    process (clk, reset)
+    begin
+        if reset = '1' then
+            count <= "00000"; 
+            counter <= 0;
+            clk_div <= '0';
+            startup_counter <= 0;
+        elsif rising_edge(clk) then
+            if startup_counter < STARTUP_DURATION then
+                startup_counter <= startup_counter + 1;
+            else
+                if counter = CLK_DIV_MAX - 1 then
+                    counter <= 0;
+                    case count is
+                        when "00000" =>
+                            count <= "10000";
+                        when "10000" =>
+                            count <= "11000";
+                        when "11000" =>
+                            count <= "11100";
+                        when "11100" =>
+                            count <= "11110";
+                        when "11110" =>
+                            count <= "11111";
+                        when "11111" =>
+                            count <= "01111";
+                        when "01111" =>
+                            count <= "00111";
+                        when "00111" =>
+                            count <= "00011";
+                        when "00011" =>
+                            count <= "00001";
+                        when "00001" =>
+                            count <= "00000";
+                        when others =>
+                            count <= "00000"; 
+                    end case;
+                    clk_div <= NOT clk_div;
+                else
+                    counter <= counter + 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    process (count)
+    begin
+        case count is
+            when "00000" =>
+                display_value <= "1000000";  
+            when "10000" =>
+                display_value <= "1111001";  
+            when "11000" =>
+                display_value <= "0100100";  
+            when "11100" =>
+                display_value <= "0110000";  
+            when "11110" =>
+                display_value <= "0011001";  
+            when "11111" =>
+                display_value <= "0010010";  
+            when "01111" =>
+                display_value <= "0000010";  
+            when "00111" =>
+                display_value <= "1111000";  
+            when "00011" =>
+                display_value <= "0000000";  
+            when "00001" =>
+                display_value <= "0011000";  
+            when others =>
+                display_value <= "1111111";   
+        end case;
+    end process;
+
+    output <= count;
+    display <= display_value;
+end Behavioral;

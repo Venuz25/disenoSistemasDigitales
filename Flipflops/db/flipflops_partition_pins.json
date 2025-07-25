@@ -1,0 +1,61 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Q[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Q[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Q[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Q[5]",
+					"strict" : false
+				},
+				{
+					"name" : "QN[0]",
+					"strict" : false
+				},
+				{
+					"name" : "QN[3]",
+					"strict" : false
+				},
+				{
+					"name" : "QN[4]",
+					"strict" : false
+				},
+				{
+					"name" : "QN[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sel[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sel[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Input1",
+					"strict" : false
+				},
+				{
+					"name" : "Input2",
+					"strict" : false
+				},
+				{
+					"name" : "clk50MHz",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

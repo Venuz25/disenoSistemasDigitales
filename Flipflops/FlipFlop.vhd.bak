@@ -1,0 +1,68 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity FlipFlop is
+    port (
+        clk : in std_logic;
+        sel : in std_logic_vector(1 downto 0);
+        input : in std_logic_vector(1 downto 0); -- Cambiado el nombre de input_data a input
+        q_out : out std_logic;
+        qn_out : out std_logic
+    );
+end entity;
+
+architecture Behavioral of FlipFlop is
+    signal flipflop_q : std_logic;
+    signal flipflop_qn : std_logic;
+begin
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            case sel is
+                when "00" => -- JK flip-flop
+                    if input = "00" then
+                        flipflop_q <= flipflop_q;
+                        flipflop_qn <= flipflop_qn;
+                    elsif input = "01" then
+                        flipflop_q <= '0';
+                        flipflop_qn <= '1';
+                    elsif input = "10" then
+                        flipflop_q <= '1';
+                        flipflop_qn <= '0';
+                    elsif input = "11" then
+                        flipflop_q <= not flipflop_q;
+                        flipflop_qn <= not flipflop_qn;
+                    end if;
+                when "01" => -- T flip-flop
+                    if input = "0" then
+                        flipflop_q <= flipflop_q;
+                        flipflop_qn <= flipflop_qn;
+                    elsif input = "1" then
+                        flipflop_q <= not flipflop_q;
+                        flipflop_qn <= not flipflop_qn;
+                    end if;
+                when "10" => -- D flip-flop
+                    flipflop_q <= input(0);
+                    flipflop_qn <= not input(0);
+                when "11" => -- SR flip-flop
+                    if input = "00" then
+                        flipflop_q <= flipflop_q;
+                        flipflop_qn <= flipflop_qn;
+                    elsif input = "01" then
+                        flipflop_q <= '0';
+                        flipflop_qn <= '1';
+                    elsif input = "10" then
+                        flipflop_q <= '1';
+                        flipflop_qn <= '0';
+                    elsif input = "11" then
+                        flipflop_q <= '0';
+                        flipflop_qn <= '0';
+                    end if;
+            end case;
+        end if;
+    end process;
+
+    q_out <= flipflop_q;
+    qn_out <= flipflop_qn;
+end architecture;

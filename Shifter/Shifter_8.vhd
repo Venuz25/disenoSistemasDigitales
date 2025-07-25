@@ -1,0 +1,38 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity Shifter_8 is
+    port (
+        data_in  : in  std_logic_vector(7 downto 0);  -- Entrada de datos de 8 bits
+        shift    : in  std_logic_vector(2 downto 0);  -- Entrada de control de 3 bits para seleccionar el desplazamiento
+        data_out : out std_logic_vector(7 downto 0)   -- Salida de datos de 8 bits
+    );
+end Shifter_8;
+
+architecture behavioral of Shifter_8 is
+begin
+    process(data_in, shift)
+    begin
+        case shift is
+            when "000" =>  -- Sin desplazamiento
+                data_out <= data_in;
+            when "001" =>  -- Desplazamiento a la derecha por 1
+                data_out <= data_in(0) & data_in(7 downto 1);
+            when "010" =>  -- Desplazamiento a la derecha por 2
+                data_out <= data_in(1 downto 0) & data_in(7 downto 2);
+            when "011" =>  -- Desplazamiento a la derecha por 3
+                data_out <= data_in(2 downto 0) & data_in(7 downto 3);
+            when "100" =>  -- Desplazamiento a la derecha por 4
+                data_out <= data_in(3 downto 0) & data_in(7 downto 4);
+            when "101" =>  -- Desplazamiento a la derecha por 5
+                data_out <= data_in(4 downto 0) & data_in(7 downto 5);
+            when "110" =>  -- Desplazamiento a la derecha por 6
+                data_out <= data_in(5 downto 0) & data_in(7 downto 6);
+            when "111" =>  -- Desplazamiento a la derecha por 7
+                data_out <= data_in(6 downto 0) & data_in(7);
+            when others =>
+                data_out <= (others => '0');  -- Cualquier otro caso pone la salida a cero
+        end case;
+    end process;
+end behavioral;
